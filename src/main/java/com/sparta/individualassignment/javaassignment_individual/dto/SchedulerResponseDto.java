@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 @Getter
 public class SchedulerResponseDto {
+    private Long id;
     private String title;
     private String contents;
     private String manager;
@@ -14,6 +15,7 @@ public class SchedulerResponseDto {
     private LocalDate date;
 
     public SchedulerResponseDto(Scheduler scheduler){
+        this.id = scheduler.getId();
         this.title = scheduler.getTitle();
         this.contents = scheduler.getContents();
         this.manager = scheduler.getManager();
@@ -21,13 +23,16 @@ public class SchedulerResponseDto {
         this.date = scheduler.getDate();
     }
 
-    public SchedulerResponseDto(String title, String contents, String manager, Long password, LocalDate date){
+    public SchedulerResponseDto(Long id, String title, String contents, String manager, Long password, LocalDate date){
+        this.id = id;
         this.title = title;
         this.contents = contents;
         this.manager = manager;
         this.password = password;
         this.date = date;
     }
-
 }
+
+
+
 

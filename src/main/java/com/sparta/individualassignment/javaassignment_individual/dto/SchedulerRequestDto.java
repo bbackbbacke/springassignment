@@ -1,9 +1,11 @@
 package com.sparta.individualassignment.javaassignment_individual.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Setter
 @Getter
 public class SchedulerRequestDto {
     private Long id;
@@ -12,4 +14,6 @@ public class SchedulerRequestDto {
     private String manager;
     private Long password;
     private LocalDate date;
+
+
 }

@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping("/scheduler")
 public class SchedulerController {
 
+
     private final JdbcTemplate jdbcTemplate;
 
     public SchedulerController(JdbcTemplate jdbcTemplate) {
@@ -40,13 +41,15 @@ public class SchedulerController {
     public List<SchedulerResponseDto> getMemos() {
         SchedulerService memoService = new SchedulerService((jdbcTemplate));
         return memoService.getSchedulers();
-//
-//
-//    //일정 수정
-//    @PutMapping("/modify")
-//    public String modify() {
-//        return "Schedule write";
-//    }
+    }
+
+
+    //일정 수정
+    @PutMapping("/modifySchedule/{id}")
+    public SchedulerResponseDto modifySchedule(@PathVariable Long id,  @RequestBody SchedulerRequestDto requestDto) {
+        SchedulerService memoService = new SchedulerService((jdbcTemplate));
+        return memoService.modifySchedule(id, requestDto);
+    }
 //
 //
 //    //일정 삭제
@@ -55,8 +58,8 @@ public class SchedulerController {
 //        return "Schedule write";
 
 
-    }
 }
+
 
 
 
