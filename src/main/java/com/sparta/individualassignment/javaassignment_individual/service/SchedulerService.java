@@ -36,29 +36,44 @@ public class SchedulerService {
         return schedulerRepository.findAll();
     }
 
-    public Long modifyScheduler(Long id, SchedulerRequestDto requestDto) {
-        SchedulerRepository schedulerRepository = new SchedulerRepository(jdbcTemplate);
-        // 해당 메모가 DB에 존재하는지 확인
-        Scheduler scheduler = schedulerRepository.findById(id);
-        if (scheduler != null) {
-            // memo 내용 수정
-            schedulerRepository.update(id, requestDto);
-            return id;
-        } else {
-            throw new IllegalArgumentException("선택한 메모는 존재하지 않습니다.");
-        }
-    }
+//    public Long modifyScheduler(Long id, SchedulerRequestDto requestDto) {
+//        SchedulerRepository schedulerRepository = new SchedulerRepository(jdbcTemplate);
+//        // 해당 메모가 DB에 존재하는지 확인
+//        Scheduler scheduler = schedulerRepository.findById(id);
+//        if (scheduler != null) {
+//            // memo 내용 수정
+//            schedulerRepository.update(id, requestDto);
+//            return id;
+//        } else {
+//            throw new IllegalArgumentException("선택한 메모는 존재하지 않습니다.");
+//        }
+//    }
 
     public SchedulerResponseDto modifySchedule(Long id, SchedulerRequestDto requestDto) {
         SchedulerRepository schedulerRepository = new SchedulerRepository(jdbcTemplate);
         // 해당 메모가 DB에 존재하는지 확인
        Scheduler scheduler = schedulerRepository.findById(id);
         if (scheduler != null) {
-            // memo 내용 수정
+            // scheduler 내용 수정
             schedulerRepository.update(id, requestDto);
-            return new SchedulerResponseDto(id, requestDto.getTitle(), requestDto.getContents(), requestDto.getManager(), requestDto.getPassword(), requestDto.getDate());
+            return new SchedulerResponseDto(id, requestDto.getTitle(), requestDto.getContents(), requestDto.getManager(), scheduler.getDate());
         } else {
             throw new IllegalArgumentException("선택한 메모는 존재하지 않습니다.");
         }
     }
+
+
+    public Long deleteScheduler(Long id) {
+        SchedulerRepository schedulerRepository = new SchedulerRepository((jdbcTemplate));
+        // 해당 메모가 DB에 존재하는지 확인
+        Scheduler scheduler = schedulerRepository.findById(id);
+        if (scheduler != null) {
+            // memo 삭제
+            schedulerRepository.delete(id);
+            return id;
+        } else {
+            throw new IllegalArgumentException("선택한 메모는 존재하지 않습니다.");
+        }
+    }
+
 }

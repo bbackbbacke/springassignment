@@ -43,15 +43,19 @@ public class SchedulerRepository {
                 rs.getString("title"),
                 rs.getString("contents"),
                 rs.getString("manager"),
-                rs.getLong("password"),
                 rs.getDate("date").toLocalDate()
         ));
     }
 
     public void update(Long id, SchedulerRequestDto requestDto) {
-        String sql = "UPDATE SCHEDULER SET title = ?, contents = ?, manager = ?, password = ?, date = ? WHERE id = ?";
+        String sql = "UPDATE SCHEDULER SET title = ?, contents = ?, manager = ?, password = ? WHERE id = ?";
         jdbcTemplate.update(sql,
-                requestDto.getTitle(), requestDto.getContents(), requestDto.getManager(), requestDto.getPassword(), Date.valueOf(requestDto.getDate()), id);
+                requestDto.getTitle(), requestDto.getContents(), requestDto.getManager(), requestDto.getPassword(), id);
+    }
+
+    public void delete(Long id) {
+        String sql = "DELETE FROM SCHEDULER WHERE id = ?";
+        jdbcTemplate.update(sql, id);
     }
 
     public Scheduler findById(Long id) {

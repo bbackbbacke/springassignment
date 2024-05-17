@@ -11,7 +11,7 @@ public class SchedulerResponseDto {
     private String title;
     private String contents;
     private String manager;
-    private Long password;
+//    private Long password;
     private LocalDate date;
 
     public SchedulerResponseDto(Scheduler scheduler){
@@ -19,16 +19,16 @@ public class SchedulerResponseDto {
         this.title = scheduler.getTitle();
         this.contents = scheduler.getContents();
         this.manager = scheduler.getManager();
-        this.password = scheduler.getPassword();
+//        this.password = scheduler.getPassword();
         this.date = scheduler.getDate();
     }
 
-    public SchedulerResponseDto(Long id, String title, String contents, String manager, Long password, LocalDate date){
+    public SchedulerResponseDto(Long id, String title, String contents, String manager, LocalDate date){
         this.id = id;
         this.title = title;
         this.contents = contents;
         this.manager = manager;
-        this.password = password;
+//        this.password = password;
         this.date = date;
     }
 }
