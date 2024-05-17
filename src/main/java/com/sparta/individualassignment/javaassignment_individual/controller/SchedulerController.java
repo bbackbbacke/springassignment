@@ -28,14 +28,13 @@ public class SchedulerController {
     }
 
 
-//    //선택한 일정 조회
-//    @GetMapping("/schedules")
-//    public SchedulerResponseDto getSchedulers() {
-//        SchedulerService schedulerService = new SchedulerService(jdbcTemplate);
-//        return schedulerService.getSchedulers();
+    //선택한 일정 조회
+    @GetMapping("/schedules/{id}")
+    public SchedulerResponseDto getScheduler(@PathVariable Long id) {
+        SchedulerService schedulerService = new SchedulerService(jdbcTemplate);
+        return schedulerService.getScheduler(id);
+    }
 
-    //
-//
     //일정 목록 조회
     @GetMapping("/schedules")
     public List<SchedulerResponseDto> getSchedulers() {
@@ -55,10 +54,10 @@ public class SchedulerController {
 //
     //일정 삭제
     @DeleteMapping("/schedules/{id}")
-    public Long delete(@PathVariable Long id) {
+    public Long delete(@PathVariable Long id, @RequestBody SchedulerRequestDto requestDto) {
         SchedulerService schedulerService = new SchedulerService((jdbcTemplate));
-        Long l = schedulerService.deleteScheduler(id);
-        return l;
+        return schedulerService.deleteScheduler(id, requestDto);
+
     }
 
 }
