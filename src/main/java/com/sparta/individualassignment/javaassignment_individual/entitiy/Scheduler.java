@@ -1,22 +1,36 @@
 package com.sparta.individualassignment.javaassignment_individual.entitiy;
 
 import com.sparta.individualassignment.javaassignment_individual.dto.SchedulerRequestDto;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
+// DB의 한 줄
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Scheduler {
+@Table(name="scheduler")
+public class Scheduler extends Timestamped {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String contents;
+
+    @Column(nullable = false)
     private String manager;
-    private Long password;
-    private LocalDate date;
+
+    @Column(nullable = false)
+    private String password;
+
+
 
     public Scheduler(SchedulerRequestDto requestDto) {
         this.id = requestDto.getId();
@@ -24,29 +38,17 @@ public class Scheduler {
         this.contents = requestDto.getContents();
         this.manager = requestDto.getManager();
         this.password = requestDto.getPassword();
-        this.date = LocalDate.now();
+
+    }
+
+    public void update(SchedulerRequestDto requestDto) {
+        this.id = requestDto.getId();
+        this.title = requestDto.getTitle();
+        this.contents = requestDto.getContents();
+        this.manager = requestDto.getManager();
+        this.password = requestDto.getPassword();
     }
 
 
-//import com.sparta.memo.dto.MemoRequestDto;
 
-
-//    @Getter
-//    @Setter
-//    @NoArgsConstructor
-//    public class Memo {
-//        private Long id;
-//        private String username;
-//        private String contents;
-//
-//        public Memo(MemoRequestDto requestDto) {
-//            this.username = requestDto.getUsername();
-//            this.contents = requestDto.getContents();
-//        }
-//
-//        public void update(MemoRequestDto requestDto) {
-//            this.username = requestDto.getUsername();
-//            this.contents = requestDto.getContents();
-//        }
-//    }
 }

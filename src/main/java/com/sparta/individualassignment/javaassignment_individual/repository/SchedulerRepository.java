@@ -1,74 +1,21 @@
 package com.sparta.individualassignment.javaassignment_individual.repository;
 
-import com.sparta.individualassignment.javaassignment_individual.dto.SchedulerRequestDto;
-import com.sparta.individualassignment.javaassignment_individual.dto.SchedulerResponseDto;
 import com.sparta.individualassignment.javaassignment_individual.entitiy.Scheduler;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.List;
 
-public class SchedulerRepository {
-    private final JdbcTemplate jdbcTemplate;
+public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
 
-    public SchedulerRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
-    public Scheduler save(Scheduler scheduler) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        String sql = "INSERT INTO SCHEDULER (title, contents, manager, password, date) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(con -> {
-            PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, scheduler.getTitle());
-            preparedStatement.setString(2, scheduler.getContents());
-            preparedStatement.setString(3, scheduler.getManager());
-            preparedStatement.setLong(4, scheduler.getPassword());
-            preparedStatement.setDate(5, Date.valueOf(scheduler.getDate()));
-            return preparedStatement;
-        }, keyHolder);
-        Long id = keyHolder.getKey().longValue();
-        scheduler.setId(id);
-        return scheduler;
-    }
+    // 전체 조회
+    List<Scheduler> findAllByOrderByCreatedAtDesc();
 
-    public List<SchedulerResponseDto> findAll() {
-        String sql = "SELECT * FROM SCHEDULER";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new SchedulerResponseDto(
-                rs.getLong("id"),
-                rs.getString("title"),
-                rs.getString("contents"),
-                rs.getString("manager"),
-                rs.getDate("date").toLocalDate()
-        ));
-    }
+    // 하나 조회
+    List<Scheduler> findAllByIdOrderByCreatedAtDesc(Long id); // 파라미터 넣는 공간이 where! 그래서 Robbie가 쓴 메모를 모아넣고 싶으면 (String Robbie) 하면 됨
 
-    public void update(Long id, SchedulerRequestDto requestDto) {
-        String sql = "UPDATE SCHEDULER SET title = ?, contents = ?, manager = ?, password = ? WHERE id = ?";
-        jdbcTemplate.update(sql,
-                requestDto.getTitle(), requestDto.getContents(), requestDto.getManager(), requestDto.getPassword(), id);
-    }
 
-    public void delete(Long id) {
-        String sql = "DELETE FROM SCHEDULER WHERE id = ?";
-        jdbcTemplate.update(sql, id);
-    }
 
-    public Scheduler findById(Long id) {
-        String sql = "SELECT * FROM SCHEDULER WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) -> {
-            Scheduler scheduler = new Scheduler();
-            scheduler.setId(rs.getLong("id"));
-            scheduler.setTitle(rs.getString("title"));
-            scheduler.setContents(rs.getString("contents"));
-            scheduler.setManager(rs.getString("manager"));
-            scheduler.setPassword(rs.getLong("password"));
-            scheduler.setDate(rs.getDate("date").toLocalDate());
-            return scheduler;
-        });
-    }
 }
+
+

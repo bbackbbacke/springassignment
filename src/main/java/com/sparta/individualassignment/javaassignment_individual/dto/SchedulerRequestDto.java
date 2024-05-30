@@ -12,7 +12,7 @@ public class SchedulerRequestDto {
     private String title;
     private String contents;
     private String manager;
-    private Long password;
+    private String password;
     private LocalDate date;
 
 
