@@ -27,9 +27,9 @@ public class SchedulerController {
 
 
     //선택한 일정 조회
-    @GetMapping("/schedules/{id}")
-    public List<SchedulerResponseDto> getScheduler(@PathVariable Long id) {
-        return schedulerService.getScheduler(id);
+    @GetMapping("/schedules/{scheduler_id}")
+    public List<SchedulerResponseDto> getScheduler(@PathVariable Long scheduler_id) {
+        return schedulerService.getScheduler(scheduler_id);
     }
 
     //일정 목록 조회
@@ -40,17 +40,17 @@ public class SchedulerController {
 
 
     //일정 수정
-    @PutMapping("/schedules/{id}")
-    public SchedulerResponseDto modifySchedule(@PathVariable Long id, @RequestBody SchedulerRequestDto requestDto) {
-        return schedulerService.modifySchedule(id, requestDto);
+    @PutMapping("/schedules/{scheduler_id}")
+    public SchedulerResponseDto modifySchedule(@PathVariable Long scheduler_id, @RequestBody SchedulerRequestDto requestDto) {
+        return schedulerService.modifySchedule(scheduler_id, requestDto);
     }
 
     //
 //
     //일정 삭제
-    @DeleteMapping("/schedules/{id}")
-    public Long delete(@PathVariable Long id, @RequestBody SchedulerRequestDto requestDto) {
-        return schedulerService.deleteScheduler(id, requestDto);
+    @DeleteMapping("/schedules/{scheduler_id}")
+    public Long delete(@PathVariable Long scheduler_id, @RequestBody SchedulerRequestDto requestDto) {
+        return schedulerService.deleteScheduler(scheduler_id, requestDto);
 
     }
 

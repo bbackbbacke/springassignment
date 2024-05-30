@@ -28,5 +28,21 @@ public class CommentService {
     }
 
 
+    public CommentResponseDto modifyComment(Long commentId, CommentRequestDto requestDto) {
+        Scheduler scheduler = schedulerRepository.findById(requestDto.getSchedule_id()).orElseThrow(()
+                -> new IllegalArgumentException("선택한 일정은 존재하지 않습니다.")
+        );
+
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()
+                -> new IllegalArgumentException("선택한 일정은 존재하지 않습니다.")
+        );
+
+        comment.update(requestDto);
+        return new CommentResponseDto(comment, scheduler);
+    }
+
+
+
+
 
 }

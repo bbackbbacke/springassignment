@@ -35,5 +35,9 @@ public class Comment extends Timestamped {
         this.scheduler = scheduler;
     }
 
+    //수정은 내용만 수정하니까
+    public void update(CommentRequestDto requestDto) {
+        this.comment = requestDto.getComment();
+    }
 }
 

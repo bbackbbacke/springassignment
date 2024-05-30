@@ -3,10 +3,7 @@ package com.sparta.individualassignment.javaassignment_individual.controller;
 import com.sparta.individualassignment.javaassignment_individual.dto.CommentRequestDto;
 import com.sparta.individualassignment.javaassignment_individual.dto.CommentResponseDto;
 import com.sparta.individualassignment.javaassignment_individual.service.CommentService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
@@ -19,10 +16,22 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    //댓글 등록
+    // 댓글 등록
     @PostMapping("/comments")
     public CommentResponseDto createComment(@RequestBody CommentRequestDto requestDto) {
         return commentService.createComment(requestDto);
     }
+
+    // 댓글 수정
+    @PutMapping("/comments/{comment_id}")
+    public CommentResponseDto modifyComment(@PathVariable Long comment_id, @RequestBody CommentRequestDto requestDto) {
+        return commentService.modifyComment(comment_id, requestDto);
+    }
+
+
+
+
+
+
 
 }
