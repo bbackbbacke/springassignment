@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor //객체 자동 생
+@RequiredArgsConstructor //객체 자동 생성
 public class CommentService {
 
     private final CommentRepository commentRepository;
