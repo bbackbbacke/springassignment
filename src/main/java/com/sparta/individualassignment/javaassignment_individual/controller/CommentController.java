@@ -28,10 +28,12 @@ public class CommentController {
         return commentService.modifyComment(comment_id, requestDto);
     }
 
+    //일정 삭제
+    @DeleteMapping("/comments/{comment_id}") //상태코드 반환
+    public Long delete(@PathVariable Long comment_id, @RequestBody CommentRequestDto requestDto) {
+        return commentService.deleteComment(comment_id, requestDto);
 
-
-
-
+    }
 
 
 }

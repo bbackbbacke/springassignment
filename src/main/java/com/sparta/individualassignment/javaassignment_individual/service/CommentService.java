@@ -42,7 +42,13 @@ public class CommentService {
     }
 
 
+    public Long deleteComment(Long commentId, CommentRequestDto requestDto) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()
+                -> new IllegalArgumentException("선택한 일정은 존재하지 않습니다.")
+        );
+        commentRepository.delete(comment);
 
-
+        return commentId; // 성공했다는 메시지와 상태 코드 반환하기?
+    }
 
 }
