@@ -33,7 +33,6 @@ public class Scheduler extends Timestamped {
 
 
     public Scheduler(SchedulerRequestDto requestDto) {
-        this.id = requestDto.getId();
         this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
         this.manager = requestDto.getManager();
@@ -42,7 +41,6 @@ public class Scheduler extends Timestamped {
     }
 
     public void update(SchedulerRequestDto requestDto) {
-        this.id = requestDto.getId();
         this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
         this.manager = requestDto.getManager();

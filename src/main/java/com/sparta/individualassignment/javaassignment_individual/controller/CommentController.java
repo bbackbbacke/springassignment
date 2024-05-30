@@ -3,6 +3,8 @@ package com.sparta.individualassignment.javaassignment_individual.controller;
 import com.sparta.individualassignment.javaassignment_individual.dto.CommentRequestDto;
 import com.sparta.individualassignment.javaassignment_individual.dto.CommentResponseDto;
 import com.sparta.individualassignment.javaassignment_individual.service.CommentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,9 +32,9 @@ public class CommentController {
 
     //일정 삭제
     @DeleteMapping("/comments/{comment_id}") //상태코드 반환
-    public Long delete(@PathVariable Long comment_id, @RequestBody CommentRequestDto requestDto) {
-        return commentService.deleteComment(comment_id, requestDto);
-
+    public ResponseEntity<String> delete(@PathVariable Long comment_id, @RequestBody CommentRequestDto requestDto) {
+        commentService.deleteComment(comment_id, requestDto);
+        return new ResponseEntity<>("삭제를 성공했습니다.", HttpStatus.OK);
     }
 
 

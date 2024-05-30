@@ -2,6 +2,7 @@ package com.sparta.individualassignment.javaassignment_individual.entitiy;
 
 import com.sparta.individualassignment.javaassignment_individual.dto.CommentRequestDto;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "comment") // 매핑할 테이블의 이름을 지정
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Comment extends Timestamped {
 
