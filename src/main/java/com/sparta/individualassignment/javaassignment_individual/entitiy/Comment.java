@@ -30,6 +30,10 @@ public class Comment extends Timestamped {
     @JoinColumn(name = "schedule_id", nullable = false)
     private Scheduler scheduler;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
 
     public Comment(CommentRequestDto requestDto, Scheduler scheduler) {
         this.user_id = requestDto.getUser_id();
