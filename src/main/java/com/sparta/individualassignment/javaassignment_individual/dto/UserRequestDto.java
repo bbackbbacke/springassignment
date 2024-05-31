@@ -13,7 +13,7 @@ public class UserRequestDto {
     @Pattern(regexp="^[0-9a-zA-Z]{8,15}$") //커스텀패턴 어노테이션
     private String password;
 
-    private String athority;
+    private String authority;
 
 
 }

@@ -27,5 +27,6 @@ public class UserResponseDto {
     //      this.password = user.getPassword();
         this.authority = user.getAuthority();
         this.date = user.getDate();
+
     }
 }

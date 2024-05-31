@@ -18,7 +18,6 @@ public class User extends TimestampedOne {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(nullable = false)
     private String nickname;
@@ -37,7 +36,7 @@ public class User extends TimestampedOne {
         this.nickname = requestDto.getNickname();
         this.username = requestDto.getUsername();
         this.password = requestDto.getPassword();
-        this.authority = requestDto.getAthority();
+        this.authority = requestDto.getAuthority();
     }
 
 }
